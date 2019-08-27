@@ -20,7 +20,7 @@ public class RandomWebServerPort {
     public static void main(String[] args) {
 
         Routing routes = Routing.builder()
-                                .any((req, res) -> res.send("It works!"))
+                                .any((req, res) -> res.send("Port should be assigned randomly!"))
                                 .build();
 
         CompletableFuture<WebServer> server = WebServer.create(routes)

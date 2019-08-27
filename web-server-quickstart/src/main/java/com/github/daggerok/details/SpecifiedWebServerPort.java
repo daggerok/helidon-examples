@@ -11,16 +11,8 @@ import java.util.concurrent.CompletableFuture;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
- * 1) You should start WebServer with configuration,
+ * You should start WebServer with configuration,
  * contains port specified (see line 22)
- *
- * 2) Other option is update application.conf file,
- * like so:
- *
- * webserver {
- *   port: 8080,
- *   bind-address: "0.0.0.0",
- * }
  */
 @Log4j2
 public class SpecifiedWebServerPort {
@@ -30,7 +22,7 @@ public class SpecifiedWebServerPort {
                                                         .port(8080)
                                                         .build();
         Routing routes = Routing.builder()
-                                .any((req, res) -> res.send("It works!"))
+                                .any((req, res) -> res.send("WebServer port was specified via configuration!"))
                                 .build();
 
         CompletableFuture<WebServer> server = WebServer.create(config, routes)
