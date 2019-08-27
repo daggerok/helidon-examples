@@ -23,3 +23,11 @@ Called-By: human
 {}
 
 ###
+GET http://127.0.0.1:8080/hello/en
+Content-Type: application/json
+
+###
+GET http://127.0.0.1:8080/hola/sp
+Content-Type: application/json
+
+###

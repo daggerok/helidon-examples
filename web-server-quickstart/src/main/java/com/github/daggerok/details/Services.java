@@ -1,4 +1,4 @@
-package com.github.daggerok;
+package com.github.daggerok.details;
 
 import com.github.daggerok.services.EnService;
 import com.github.daggerok.services.SpService;
@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Log4j2
-public class Main {
+public class Services {
     public static void main(String[] args) {
 
         ServerConfiguration configuration = ServerConfiguration.builder()

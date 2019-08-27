@@ -1,7 +1,6 @@
 package com.github.daggerok.details;
 
 import io.helidon.webserver.Routing;
-import io.helidon.webserver.ServerConfiguration;
 import io.helidon.webserver.WebServer;
 import io.vavr.control.Try;
 import lombok.extern.log4j.Log4j2;
