@@ -12,3 +12,6 @@ links:
 * [Helidon WebServer Configuration](https://helidon.io/docs/latest/#/webserver/02_configuration)
 * [Server configurations](https://helidon.io/docs/latest/apidocs/index.html?io/helidon/webserver/ServerConfiguration.html)
 * [Routing](https://helidon.io/docs/latest/#/webserver/03_routing)
+* [JAX-RS Support](https://helidon.io/docs/latest/#/webserver/07_jersey-support)
+* [JSON-P](https://helidon.io/docs/latest/#/webserver/08_json-support)
+* [Jackson / JSON-P Jersey JAX-RS problem-solving](web-server-jersey-jsonp)
