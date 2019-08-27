@@ -42,6 +42,17 @@ jobs:
   include:
 
   - stage: test
+    name: web-server-jersey-quickstart
+    jdk: openjdk8
+    script:
+    - cd $TRAVIS_BUILD_DIR && ./mvnw -f web-server-jersey-quickstart/pom.xml
+    - java -jar $TRAVIS_BUILD_DIR/web-server-jersey-quickstart/target/*-all.jar  &
+    - wait_for 8080
+    - http :8080
+    - http put :8080/test-fallback
+    - stop_any 80 8080
+
+  - stage: test
     name: web-server-quickstart
     jdk: openjdk8
     script:

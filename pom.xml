@@ -24,6 +24,7 @@
         <log4j.version>2.12.1</log4j.version>
         <lombok.version>1.18.8</lombok.version>
         <helidon.version>1.2.1</helidon.version>
+        <jersey-media-json-jackson.version>2.29</jersey-media-json-jackson.version>
 
         <capsule-maven-plugin.version>1.5.1</capsule-maven-plugin.version>
     </properties>
@@ -44,6 +45,13 @@
                 <version>${log4j.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+
+            <!-- requires to fix helidon's JAX-RS JSON serialization issues... -->
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+                <version>${jersey-media-json-jackson.version}</version>
             </dependency>
 
             <dependency>
@@ -90,6 +98,7 @@
 
     <modules>
         <module>web-server-quickstart</module>
+        <module>web-server-jersey-quickstart</module>
     </modules>
 
 </project>
