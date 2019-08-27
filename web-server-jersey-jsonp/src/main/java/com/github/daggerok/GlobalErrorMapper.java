@@ -3,6 +3,7 @@ package com.github.daggerok;
 import lombok.extern.log4j.Log4j2;
 import org.glassfish.jersey.process.internal.RequestScoped;
 
+import javax.json.Json;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,14 +23,15 @@ public class GlobalErrorMapper implements ExceptionMapper<Throwable> {
     public Response toResponse(Throwable throwable) {
 
         String message = throwable.getLocalizedMessage();
-        log.error(message);
+        String error = String.format("Fallback %s", message);
 
-        return Response.ok(Jsonp.objectBuilder()
-                                .add("error", String.format("Fallback! %s", message))
-                                .add("_links", Jsonp.objectBuilder()
-                                                    .add("baseUrl", uriInfo.getBaseUri().toASCIIString())
-                                                    .build())
-                                .build())
+        log.info(message);
+        return Response.ok(Json.createObjectBuilder()
+                               .add("error", error)
+                               .add("_links", Json.createObjectBuilder()
+                                                  .add("baseUrl", Hateoas.baseUrl(uriInfo))
+                                                  .build())
+                               .build())
                        .type(MediaType.APPLICATION_JSON)
                        // .header("oops", "^_^")
                        .build();

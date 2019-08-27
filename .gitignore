@@ -10,3 +10,6 @@
 target/
 build/
 out/
+javacore.*.txt
+*.dmp
+*.trc

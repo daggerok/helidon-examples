@@ -24,9 +24,9 @@
         <log4j.version>2.12.1</log4j.version>
         <lombok.version>1.18.8</lombok.version>
         <helidon.version>1.2.1</helidon.version>
-        <jersey-media-json-jackson.version>2.29</jersey-media-json-jackson.version>
-
         <capsule-maven-plugin.version>1.5.1</capsule-maven-plugin.version>
+        <jersey-media-json-processing.version>2.29</jersey-media-json-processing.version>
+        <jackson-jaxrs-json-provider.version>2.10.0.pr1</jackson-jaxrs-json-provider.version>
     </properties>
 
     <dependencyManagement>
@@ -47,11 +47,17 @@
                 <type>pom</type>
             </dependency>
 
-            <!-- requires to fix helidon's JAX-RS JSON serialization issues... -->
+            <!-- requires to fix helidon's JAX-RS JSON serialization issues related to JsonObject / JsonArray... -->
             <dependency>
                 <groupId>org.glassfish.jersey.media</groupId>
-                <artifactId>jersey-media-json-jackson</artifactId>
-                <version>${jersey-media-json-jackson.version}</version>
+                <artifactId>jersey-media-json-processing</artifactId>
+                <version>${jersey-media-json-processing.version}</version>
+            </dependency>
+            <!-- requires to fix helidon's JAX-RS JSON serialization issues related to Collections... -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-json-provider</artifactId>
+                <version>${jackson-jaxrs-json-provider.version}</version>
             </dependency>
 
             <dependency>
@@ -99,6 +105,7 @@
     <modules>
         <module>web-server-quickstart</module>
         <module>web-server-jersey-quickstart</module>
+        <module>web-server-jersey-jsonp</module>
     </modules>
 
 </project>

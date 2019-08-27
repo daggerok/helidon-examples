@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="web-server-jersey-jsonp-integration-tests#3-jsonify" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/web-server-jersey-jsonp/web-server-jersey-jsonp-integration-tests.http" index="3">
+    <method v="2" />
+  </configuration>
+</component>

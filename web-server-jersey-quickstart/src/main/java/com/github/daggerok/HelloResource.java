@@ -1,26 +1,22 @@
 package com.github.daggerok;
 
-import io.vavr.collection.HashMap;
 import lombok.extern.log4j.Log4j2;
 import org.glassfish.jersey.process.internal.RequestScoped;
 
+import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.net.URI;
-
-import static java.util.Collections.singletonMap;
 
 @Log4j2
 @Path("")
-@RequestScoped // required if you need @Context
-@Produces(MediaType.APPLICATION_JSON)
+@RequestScoped
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class HelloResource {
 
     @Context
@@ -28,16 +24,13 @@ public class HelloResource {
 
     @GET
     @Path("")
-    public Response hello() {
+    public JsonObject hello() {
         log.info("hello!");
-        return Response.ok(HashMap.of("message", "Hello, World!",
-                                      "_links", singletonMap("baseUrl", getBaseUrl()))
-                                  .toJavaMap())
-                       .build();
-    }
-
-    private String getBaseUrl() {
-        URI uri = uriInfo.getAbsolutePath();
-        return String.format("%s://%s", uri.getScheme(), uri.getAuthority());
+        return Jsonp.objectBuilder()
+                    .add("message", "Hello, World!")
+                    .add("_links", Jsonp.objectBuilder()
+                                        .add("baseUrl", uriInfo.getBaseUri().toString())
+                                        .build())
+                    .build();
     }
 }

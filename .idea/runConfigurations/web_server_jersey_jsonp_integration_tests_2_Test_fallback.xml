@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="web-server-jersey-jsonp-integration-tests#2-Test-fallback" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/web-server-jersey-jsonp/web-server-jersey-jsonp-integration-tests.http" index="2">
+    <method v="2" />
+  </configuration>
+</component>

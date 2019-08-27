@@ -1,6 +1,5 @@
 package com.github.daggerok.rejister_jax_rs_application;
 
-import io.vavr.collection.HashMap;
 import lombok.extern.log4j.Log4j2;
 import org.glassfish.jersey.process.internal.RequestScoped;
 
@@ -10,9 +9,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.net.URI;
-
-import static java.util.Collections.singletonMap;
 
 @Log4j2
 @Provider
@@ -24,17 +20,18 @@ public class GlobalErrorMapper implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable throwable) {
-        log.info("fallback!");
-        return Response.ok(HashMap.of("result", "Fallback!",
-                                      "_links", singletonMap("baseUrl", getBaseUrl()))
-                                  .toJavaMap())
-                       .type(MediaType.APPLICATION_JSON)
-                       .header("oops", "^_^")
-                       .build();
-    }
 
-    private String getBaseUrl() {
-        URI uri = uriInfo.getAbsolutePath();
-        return String.format("%s://%s", uri.getScheme(), uri.getAuthority());
+        String message = throwable.getLocalizedMessage();
+        log.error(message);
+
+        return Response.ok(Jsonp.objectBuilder()
+                                .add("error", String.format("Fallback! %s", message))
+                                .add("_links", Jsonp.objectBuilder()
+                                                    .add("baseUrl", uriInfo.getBaseUri().toASCIIString())
+                                                    .build())
+                                .build())
+                       .type(MediaType.APPLICATION_JSON)
+                       // .header("oops", "^_^")
+                       .build();
     }
 }

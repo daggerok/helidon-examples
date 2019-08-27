@@ -1,5 +1,6 @@
 package com.github.daggerok.rejister_jax_rs_application;
 
+import io.helidon.media.jsonp.server.JsonSupport;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerConfiguration;
 import io.helidon.webserver.WebServer;
@@ -18,6 +19,7 @@ public class Main {
                                                          .port(8080)
                                                          .build(),
                                       Routing.builder()
+                                             .register("/", JsonSupport.create())
                                              .register("/",
                                                        JerseySupport.builder(new JaxRsApplication())
                                                                     .build())
