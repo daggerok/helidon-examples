@@ -4,7 +4,7 @@
     <module name="web-server-quickstart" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.github.daggerok.details.*" />
+        <option name="PATTERN" value="com.github.daggerok.details.RequestPredicates" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

@@ -1,7 +1,9 @@
 package com.github.daggerok;
 
+import io.helidon.common.http.MediaType;
 import io.helidon.config.Config;
 import io.helidon.config.ConfigSources;
+import io.helidon.webserver.RequestPredicate;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerConfiguration;
 import io.helidon.webserver.WebServer;
@@ -22,10 +24,12 @@ public class Main {
                                                                .port(8080)
                                                                .build();
         Routing routes = Routing.builder()
-                                .get((req, res) -> res.send("GET method"))
-                                .post((req, res) -> res.send("POST method"))
-                                // ...
-                                .any((req, res) -> res.send("This is a fallback route!"))
+                                .get((req, res) -> res.send("Hola! POST something to me!"))
+                                .any(RequestPredicate.create()
+                                                     .hasContentType(MediaType.APPLICATION_JSON)
+                                                     .containsHeader("Called-By", "human")
+                                                     .thenApply((req, res) -> res.send("Hey!"))
+                                                     .otherwise((req, res) -> res.send("R-O-B-O-t@...!")))
                                 .build();
 
         CompletableFuture<WebServer> server = WebServer.create(configuration, routes)

@@ -3,3 +3,23 @@ Content-Type: application/json
 Accept: application/json
 
 ###
+POST http://127.0.0.1:8080/
+Called-By: human
+
+{}
+
+
+###
+POST http://127.0.0.1:8080/
+Content-Type: application/json
+
+{}
+
+###
+POST http://127.0.0.1:8080/
+Content-Type: application/json
+Called-By: human
+
+{}
+
+###
