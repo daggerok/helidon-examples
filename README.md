@@ -17,3 +17,7 @@ links:
 * [Jackson / JSON-P Jersey JAX-RS problem-solving](web-server-jersey-jsonp)
 * [JSON-B](https://helidon.io/docs/latest/#/webserver/09_jsonb-support)
 * [Jackson support](https://helidon.io/docs/latest/#/webserver/10_jackson-support)
+* [Hierarchical features](https://helidon.io/docs/latest/#/config/03_hierarchical-features)
+* [fold the universe](https://dzone.com/articles/folding-the-universe-part-iii-java-8-list-and-stre)
+* [Configs](https://helidon.io/docs/latest/#/webserver/02_configuration)
+* [Advanced Config Sources](https://helidon.io/docs/latest/#/config/06_advanced-configuration)

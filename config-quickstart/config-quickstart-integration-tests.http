@@ -1,0 +1,9 @@
+GET http://127.0.0.1:8080/conf
+Content-Type: application/json
+Accept: application/json
+
+{
+  "ololo": "trololo"
+}
+
+###

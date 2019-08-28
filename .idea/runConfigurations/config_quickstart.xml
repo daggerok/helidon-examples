@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="config-quickstart" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.github.daggerok.Main" />
+    <module name="config-quickstart" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.github.daggerok.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

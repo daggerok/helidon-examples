@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="config-quickstart-integration-tests#1-POST" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/config-quickstart/config-quickstart-integration-tests.http">
+    <method v="2" />
+  </configuration>
+</component>

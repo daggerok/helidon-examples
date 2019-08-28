@@ -139,6 +139,7 @@
         <module>web-server-jersey-quickstart</module>
         <module>web-server-jersey-jsonp</module>
         <module>grpc-server-quickstart</module>
+        <module>config-quickstart</module>
     </modules>
 
 </project>
