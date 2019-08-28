@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="microprofile-quickstart-integration-tests#2-Fallback-POST" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/microprofile-quickstart/microprofile-quickstart-integration-tests.http" index="2">
+    <method v="2" />
+  </configuration>
+</component>

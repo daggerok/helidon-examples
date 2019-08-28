@@ -4,7 +4,7 @@
     <module name="web-server-jersey-quickstart" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.github.daggerok.*" />
+        <option name="PATTERN" value="com.github.daggerok.details.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

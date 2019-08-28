@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="web-server-jersey-jsonp" type="Application" factoryName="Application">
+  <configuration default="false" name="microprofile-quickstart" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.github.daggerok.Main" />
-    <module name="web-server-jersey-jsonp" />
+    <module name="microprofile-quickstart" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.github.daggerok.details.*" />
