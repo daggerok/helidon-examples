@@ -25,7 +25,7 @@
         <lombok.version>1.18.8</lombok.version>
         <helidon.version>1.2.1</helidon.version>
         <capsule-maven-plugin.version>1.5.1</capsule-maven-plugin.version>
-        <spotbugs-maven-plugin.version>3.1.12</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>3.1.12.2</spotbugs-maven-plugin.version>
         <jersey-media-json-processing.version>2.29</jersey-media-json-processing.version>
         <jackson-jaxrs-json-provider.version>2.10.0.pr1</jackson-jaxrs-json-provider.version>
     </properties>
