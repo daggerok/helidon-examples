@@ -25,6 +25,7 @@
         <lombok.version>1.18.8</lombok.version>
         <helidon.version>1.2.1</helidon.version>
         <capsule-maven-plugin.version>1.5.1</capsule-maven-plugin.version>
+        <spotbugs-maven-plugin.version>3.1.12</spotbugs-maven-plugin.version>
         <jersey-media-json-processing.version>2.29</jersey-media-json-processing.version>
         <jackson-jaxrs-json-provider.version>2.10.0.pr1</jackson-jaxrs-json-provider.version>
     </properties>
@@ -77,7 +78,7 @@
     </dependencyManagement>
 
     <build>
-        <defaultGoal>clean package</defaultGoal>
+        <defaultGoal>clean spotbugs:check package</defaultGoal>
 
         <pluginManagement>
             <plugins>
@@ -100,7 +101,38 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-maven-plugin.version}</version>
+                <configuration>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <xmlOutput>true</xmlOutput>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-maven-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <modules>
         <module>web-server-quickstart</module>

@@ -15,3 +15,5 @@ links:
 * [JAX-RS Support](https://helidon.io/docs/latest/#/webserver/07_jersey-support)
 * [JSON-P](https://helidon.io/docs/latest/#/webserver/08_json-support)
 * [Jackson / JSON-P Jersey JAX-RS problem-solving](web-server-jersey-jsonp)
+* [JSON-B](https://helidon.io/docs/latest/#/webserver/09_jsonb-support)
+* [Jackson support](https://helidon.io/docs/latest/#/webserver/10_jackson-support)
