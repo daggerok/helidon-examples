@@ -12,6 +12,13 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>microprofile-jpa</artifactId>
 
+    <properties>
+        <weld-jta.version>3.0.3.Final</weld-jta.version>
+        <microbean-jpa-cdi.version>0.4.1</microbean-jpa-cdi.version>
+        <microbean-jpa-weld-se.version>0.4.2</microbean-jpa-weld-se.version>
+        <org.eclipse.persistence.jpa.version>2.7.4</org.eclipse.persistence.jpa.version>
+    </properties>
+
     <dependencies>
         <!-- Helidon MicroProfile JPA: begin (required) -->
         <dependency>
@@ -160,19 +167,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
         </dependency>
-
-        <!--<dependency>
-            <groupId>io.helidon.webserver</groupId>
-            <artifactId>helidon-webserver-test-support</artifactId>
-            <scope>test</scope>
-        </dependency>-->
     </dependencies>
-    <properties>
-        <weld-jta.version>3.0.3.Final</weld-jta.version>
-        <org.eclipse.persistence.jpa.version>2.7.3</org.eclipse.persistence.jpa.version>
-        <microbean-jpa-cdi.version>0.4.1</microbean-jpa-cdi.version>
-        <microbean-jpa-weld-se.version>0.4.2</microbean-jpa-weld-se.version>
-    </properties>
 
     <build>
         <plugins>
