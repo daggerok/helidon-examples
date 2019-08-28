@@ -25,8 +25,8 @@
         <lombok.version>1.18.8</lombok.version>
         <helidon.version>1.2.1</helidon.version>
 
-        <jandex.version>2.0.4.Final</jandex.version>
-        <jandex-maven-plugin.version>1.0.5</jandex-maven-plugin.version>
+        <jandex.version>2.1.1.Final</jandex.version>
+        <jandex-maven-plugin.version>1.0.6</jandex-maven-plugin.version>
         <!-- for some reasons jandex-maven-plugin.version 1.0.6 fails... -->
 
         <capsule-maven-plugin.version>1.5.1</capsule-maven-plugin.version>
