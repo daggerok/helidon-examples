@@ -33,7 +33,7 @@ public class GlobalErrorMapper implements ExceptionMapper<Throwable> {
                                                   .build())
                                .build())
                        .type(MediaType.APPLICATION_JSON)
-                       // .header("oops", "^_^")
+                       .header("oops", "^_^")
                        .build();
     }
 }
