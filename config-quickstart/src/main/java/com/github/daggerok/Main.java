@@ -1,5 +1,6 @@
 package com.github.daggerok;
 
+import io.helidon.common.http.Http;
 import io.helidon.config.Config;
 import io.helidon.config.ConfigSources;
 import io.helidon.media.jsonp.common.JsonProcessing;
@@ -25,6 +26,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import static java.util.Collections.singletonList;
+
 @Log4j2
 public class Main {
 
@@ -48,51 +51,66 @@ public class Main {
 
         ServerConfiguration configuration = ServerConfiguration.create(config);
 
+        Handler jsonpHandler = Handler.create(JsonObject.class, (req, res, jsonObject) -> {
+            log.debug("received jsonObject: {}", jsonObject);
+            res.send(Json.createObjectBuilder()
+                         .add("received", jsonObject)
+                         .add("jsonArray",
+                              config.asMap()
+                                    .orElse(new HashMap<>())
+                                    .entrySet()
+                                    .stream()
+                                    .map(entry -> Json.createObjectBuilder()
+                                                      .add(entry.getKey(), entry.getValue())
+                                                      .build())
+                                    .collect(JsonCollectors.toJsonArray()))
+                         .add("jsonObject",
+                              config.asMap()
+                                    .orElse(new HashMap<>())
+                                    .entrySet()
+                                    .stream() // <-- also worked with .parallelStream()
+                                    .collect(FoldLibrary.entriesToConcurrentHashMap)
+                                    .entrySet()
+                                    .stream() // <-- also worked with .parallelStream() too!
+                                    .reduce(Json.createObjectBuilder(),
+                                            // <-- initial state
+                                            // // add -> merge into same type as initial state
+                                            // // NOTE: this variant isn't worked at all!
+                                            // (jsonBuilder, entry) -> Json.createObjectBuilder()
+                                            //                             .add(entry.getKey(),
+                                            //                                  entry.getValue()),
+                                            // // mutate same jsonBuilder object to make it work:
+                                            (jsonBuilder, entry) -> jsonBuilder.add(entry.getKey(), entry.getValue()),
+                                            // combine -> merge (needed only when running in parallel)
+                                            (jsonBuilder1, jsonBuilder2) -> Json.createObjectBuilder()
+                                                                                .addAll(jsonBuilder1)
+                                                                                .addAll(jsonBuilder2))
+                                    .build())
+                         .build());
+        });
+
+        // Handler fallback = Handler.create(JsonObject.class,
+        //                                   (req, res, whatever) ->
+        //                                           Json.createObjectBuilder()
+        //                                               .add("GET", "/conf")
+        //                                               .build());
+
+        Handler oops = (req, res) -> {
+            // res.headers().add("Content-Type", "application/json");
+            res.status(Http.ResponseStatus.create(200))
+               .send(String.format(
+                       "curl -XPOST http://%s/conf -d'{\"k\":\"v\"}' -H'Content-Type:application/json' | jq '.'",
+                       req.headers()
+                          .toMap()
+                          .getOrDefault("Host", singletonList("http://127.0.0.1:8080"))
+                          .iterator()
+                          .next()));
+        };
+
         Routing routing = Routing.builder()
-                                 .register("/conf", JsonSupport.create(JsonProcessing.create()))
-                                 .any("/conf",
-                                      Handler.create(JsonObject.class, (req, res, jsonObject) -> {
-                                          log.debug("received jsonObject: {}", jsonObject);
-                                          res.send(Json.createObjectBuilder()
-                                                       .add("received", jsonObject)
-                                                       .add("jsonArray",
-                                                            config.asMap()
-                                                                  .orElse(new HashMap<>())
-                                                                  .entrySet()
-                                                                  .stream()
-                                                                  .map(entry -> Json.createObjectBuilder()
-                                                                                    .add(entry.getKey(),
-                                                                                         entry.getValue())
-                                                                                    .build())
-                                                                  .collect(JsonCollectors.toJsonArray()))
-                                                       .add("jsonObject",
-                                                            config.asMap()
-                                                                  .orElse(new HashMap<>())
-                                                                  .entrySet()
-                                                                  .stream() // <-- also worked with .parallelStream()
-                                                                  .collect(FoldLibrary.entriesToConcurrentHashMap)
-                                                                  .entrySet()
-                                                                  .stream() // <-- also worked with .parallelStream() too!
-                                                                  .reduce(Json.createObjectBuilder(), // <-- initial state
-                                                                          // // add -> merge into same type as initial state
-                                                                          // // NOTE: this variant isn't worked at all!
-                                                                          // (jsonBuilder, entry) -> Json.createObjectBuilder()
-                                                                          //                             .add(entry.getKey(),
-                                                                          //                                  entry.getValue()),
-                                                                          // // mutate same jsonBuilder object to make it work:
-                                                                          (jsonBuilder, entry) -> {
-                                                                              jsonBuilder.add(entry.getKey(),
-                                                                                              entry.getValue());
-                                                                              return jsonBuilder;
-                                                                          },
-                                                                          // combine -> merge (needed only when running in parallel)
-                                                                          (jsonBuilder1, jsonBuilder2) -> Json.createObjectBuilder()
-                                                                                                              .addAll(jsonBuilder1)
-                                                                                                              .addAll(jsonBuilder2))
-                                                                  .build())
-                                                       .build());
-                                      })
-                                 )
+                                 .register(JsonSupport.create(JsonProcessing.create()))
+                                 .post("/conf", jsonpHandler)
+                                 .any("/{+}", oops)
                                  .build();
 
         WebServer webServer = WebServer.create(configuration, routing);
@@ -108,17 +126,19 @@ public class Main {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     private static final class FoldLibrary {
 
-        // private static final <U> Collection<U> combine(Collection<U> a, Collection<U> b) {
-        //     CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<>(a);
-        //     result.addAll(new CopyOnWriteArrayList<>(b));
-        //     return result;
-        // }
-        //
-        // private static final <U> Collection<U> add(Collection<U> list, U i) {
-        //     CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<>(list);
-        //     result.add(i);
-        //     return result;
-        // }
+        /*
+        private static final <U> Collection<U> combine(Collection<U> a, Collection<U> b) {
+            CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<>(a);
+            result.addAll(new CopyOnWriteArrayList<>(b));
+            return result;
+        }
+
+        private static final <U> Collection<U> add(Collection<U> list, U i) {
+            CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<>(list);
+            result.add(i);
+            return result;
+        }
+        */
 
         private static final Collector<Map.Entry<String, String>, ConcurrentHashMap<String, String>, Map<String, String>> entriesToConcurrentHashMap =
                 new Collector<Map.Entry<String, String>, ConcurrentHashMap<String, String>, Map<String, String>>() {
@@ -129,24 +149,22 @@ public class Main {
                     }
 
                     @Override
-                    // @SuppressWarnings("unchecked")
                     public BiConsumer<ConcurrentHashMap<String, String>, Map.Entry<String, String>> accumulator() {
-                        return (map, entry) -> map.put(entry.getKey(), entry.getValue()); // unchecked
+                        return (map, entry) -> map.put(entry.getKey(), entry.getValue());
                     }
 
                     @Override
-                    // @SuppressWarnings("unchecked")
                     public BinaryOperator<ConcurrentHashMap<String, String>> combiner() {
                         return (map1, map2) -> {
-                            map1.putAll(map2); // unchecked
+                            map1.putAll(map2);
                             return map1;
                         };
                     }
 
                     @Override
                     public Function<ConcurrentHashMap<String, String>, Map<String, String>> finisher() {
-                        // return a -> a;
-                        // return Function.identity();
+                        // return a -> a; // can work with String -> List<String>
+                        // return Function.identity(); // can work with String -> List<String>
                         return ConcurrentHashMap::new;
                     }
 
