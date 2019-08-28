@@ -167,12 +167,6 @@
             <scope>test</scope>
         </dependency>-->
     </dependencies>
-    <properties>
-        <weld-jta.version>3.0.3.Final</weld-jta.version>
-        <org.eclipse.persistence.jpa.version>2.7.3</org.eclipse.persistence.jpa.version>
-        <microbean-jpa-cdi.version>0.4.1</microbean-jpa-cdi.version>
-        <microbean-jpa-weld-se.version>0.4.2</microbean-jpa-weld-se.version>
-    </properties>
 
     <build>
         <plugins>

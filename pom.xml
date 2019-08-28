@@ -35,10 +35,14 @@
         <jackson-jaxrs-json-provider.version>2.10.0.pr1</jackson-jaxrs-json-provider.version>
 
         <h2.version>1.4.199</h2.version>
+        <weld-jta.version>3.0.3.Final</weld-jta.version>
+        <microbean-jpa-cdi.version>0.4.1</microbean-jpa-cdi.version>
         <hibernate-core.version>5.4.4.Final</hibernate-core.version>
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
+        <microbean-jpa-weld-se.version>0.4.2</microbean-jpa-weld-se.version>
         <deltaspike-data-module.version>1.9.1</deltaspike-data-module.version>
         <hibernate-validator-cdi.version>6.0.17.Final</hibernate-validator-cdi.version>
+        <org.eclipse.persistence.jpa.version>2.7.3</org.eclipse.persistence.jpa.version>
     </properties>
 
     <dependencyManagement>
@@ -185,13 +189,14 @@
     </reporting>
 
     <modules>
-        <module>web-server-quickstart</module>
-        <module>web-server-jersey-quickstart</module>
-        <module>web-server-jersey-jsonp</module>
-        <module>grpc-server-quickstart</module>
+        <module>cdi-datasource-hikaricp-quickstart</module>
         <module>config-quickstart</module>
+        <module>grpc-server-quickstart</module>
         <module>microprofile-quickstart</module>
         <module>microprofile-jpa</module>
+        <module>web-server-jersey-quickstart</module>
+        <module>web-server-jersey-jsonp</module>
+        <module>web-server-quickstart</module>
     </modules>
 
 </project>
