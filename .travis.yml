@@ -48,6 +48,7 @@ jobs:
     - cd $TRAVIS_BUILD_DIR && ./mvnw -f microprofile-jpa/pom.xml
     - java -jar $TRAVIS_BUILD_DIR/microprofile-jpa/target/*-all.jar  &
     - wait_for 8080
+    - http :8080/bank-account
     - http :8080/bank-account username=username balance=123.45
     - http :8080/bank-account
     - http :8080
