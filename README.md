@@ -23,3 +23,4 @@ links:
 * [Advanced Config Sources](https://helidon.io/docs/latest/#/config/06_advanced-configuration)
 * [Useful GitHub helidon-mp-jpa repository](https://github.com/ljnelson/helidon-mp-jpa)
 * https://medium.com/oracledevs/helidon-brings-microprofile-2-2-support-93d85bb4223e
+* https://jersey.github.io/documentation/latest/filters-and-interceptors.html
