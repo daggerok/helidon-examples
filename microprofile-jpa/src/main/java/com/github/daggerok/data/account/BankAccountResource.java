@@ -4,8 +4,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
-import javax.json.JsonNumber;
 import javax.json.JsonObject;
+import javax.json.JsonString;
 import javax.json.stream.JsonCollectors;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
@@ -36,8 +36,9 @@ public class BankAccountResource {
     @Path("")
     public BackAccount register(JsonObject request) {
         String username = request.getString("username", "anonymous");
-        BigDecimal balance = Optional.ofNullable(request.getJsonNumber("balance"))
-                                     .map(JsonNumber::bigDecimalValue)
+        BigDecimal balance = Optional.ofNullable(request.getJsonString("balance"))
+                                     .map(JsonString::getString)
+                                     .map(BigDecimal::new)
                                      .orElse(new BigDecimal("0.00"));
         // BigDecimal balance = Optional.of(request.getString("balance", "0.00"))
         //                              .map(BigDecimal::new)
