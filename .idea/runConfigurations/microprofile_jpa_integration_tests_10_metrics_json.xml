@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="microprofile-jpa-integration-tests#10-metrics-json" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/microprofile-jpa/microprofile-jpa-integration-tests.http" index="10">
+    <method v="2" />
+  </configuration>
+</component>

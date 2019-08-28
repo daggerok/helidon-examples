@@ -1,0 +1,60 @@
+POST http://127.0.0.1:8080/bank-account
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "Maksimko",
+  "balance": 123.45
+}
+
+###
+GET http://127.0.0.1:8080/bank-account
+Content-Type: application/json
+Accept: application/json
+
+###
+GET http://127.0.0.1:8080
+Content-Type: application/json
+Accept: application/json
+
+###
+POST http://127.0.0.1:8080/not-found
+Called-By: human
+Accept: application/json
+Content-Type: application/json
+
+{
+  "ololo": "trololo"
+}
+
+###
+POST http://127.0.0.1:8080
+Called-By: human
+Accept: application/json
+Content-Type: application/json
+
+{
+  "hello": "world"
+}
+
+###
+GET http://127.0.0.1:8080/openapi
+
+###
+GET http://127.0.0.1:8080/openapi
+Accept: application/json
+
+###
+GET http://127.0.0.1:8080/health
+
+###
+GET http://127.0.0.1:8080/metrics
+
+###
+GET http://127.0.0.1:8080/metrics
+Accept: application/json
+
+###
+GET http://127.0.0.1:8080/static/microprofile-quickstart-integration-tests.http
+
+###

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="DDD" transaction-type="RESOURCE_LOCAL">
+        <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+
+        <!-- Add the following to work around exception issue -->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:default"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+            <!-- optional properties:
+            <property name="javax.persistence.jdbc.backAccountEntity" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
+            <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
+            -->
+
+            <!-- any other properties are really optional:
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="sql-script"/>
+            <property name="eclipselink.deploy-on-startup" value="true"/>
+            <property name="eclipselink.jdbc.native-sql" value="true"/>
+            <property name="eclipselink.logging.logger" value="JavaLogger"/>
+            <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.H2Platform"/>
+            <property name="eclipselink.target-server" value="org.microbean.eclipselink.cdi.CDISEPlatform"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            -->
+        </properties>
+    </persistence-unit>
+</persistence>

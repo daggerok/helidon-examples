@@ -26,16 +26,36 @@
         <helidon.version>1.2.1</helidon.version>
 
         <jandex.version>2.0.4.Final</jandex.version>
-        <jandex-maven-plugin.version>1.0.6</jandex-maven-plugin.version>
+        <jandex-maven-plugin.version>1.0.5</jandex-maven-plugin.version>
+        <!-- for some reasons jandex-maven-plugin.version 1.0.6 fails... -->
 
         <capsule-maven-plugin.version>1.5.1</capsule-maven-plugin.version>
         <spotbugs-maven-plugin.version>3.1.12.2</spotbugs-maven-plugin.version>
         <jersey-media-json-processing.version>2.29</jersey-media-json-processing.version>
         <jackson-jaxrs-json-provider.version>2.10.0.pr1</jackson-jaxrs-json-provider.version>
+
+        <h2.version>1.4.199</h2.version>
+        <hibernate-core.version>5.4.4.Final</hibernate-core.version>
+        <javax.persistence-api.version>2.2</javax.persistence-api.version>
+        <deltaspike-data-module.version>1.9.1</deltaspike-data-module.version>
+        <hibernate-validator-cdi.version>6.0.17.Final</hibernate-validator-cdi.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>${javax.persistence-api.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate-core.version}</version>
+                <type>jar</type>
+            </dependency>
+
             <dependency>
                 <groupId>io.helidon</groupId>
                 <artifactId>helidon-bom</artifactId>
@@ -48,6 +68,7 @@
                 <groupId>org.jboss</groupId>
                 <artifactId>jandex</artifactId>
                 <version>${jandex.version}</version>
+                <type>jar</type>
             </dependency>
 
             <dependency>
@@ -63,12 +84,14 @@
                 <groupId>org.glassfish.jersey.media</groupId>
                 <artifactId>jersey-media-json-processing</artifactId>
                 <version>${jersey-media-json-processing.version}</version>
+                <type>jar</type>
             </dependency>
             <!-- requires to fix helidon's JAX-RS JSON serialization issues related to Collections... -->
             <dependency>
                 <groupId>com.fasterxml.jackson.jaxrs</groupId>
                 <artifactId>jackson-jaxrs-json-provider</artifactId>
                 <version>${jackson-jaxrs-json-provider.version}</version>
+                <type>jar</type>
             </dependency>
 
             <dependency>
@@ -77,12 +100,14 @@
                 <version>${lombok.version}</version>
                 <optional>true</optional>
                 <scope>provided</scope>
+                <type>jar</type>
             </dependency>
 
             <dependency>
                 <groupId>io.vavr</groupId>
                 <artifactId>vavr</artifactId>
                 <version>${vavr.version}</version>
+                <type>jar</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -166,6 +191,7 @@
         <module>grpc-server-quickstart</module>
         <module>config-quickstart</module>
         <module>microprofile-quickstart</module>
+        <module>microprofile-jpa</module>
     </modules>
 
 </project>

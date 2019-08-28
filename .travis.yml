@@ -42,6 +42,26 @@ jobs:
   include:
 
   - stage: test
+    name: microprofile-jpa
+    jdk: openjdk8
+    script:
+    - cd $TRAVIS_BUILD_DIR && ./mvnw -f microprofile-jpa/pom.xml
+    - java -jar $TRAVIS_BUILD_DIR/microprofile-jpa/target/*-all.jar  &
+    - wait_for 8080
+    - http :8080/bank-account username=username balance=123.45
+    - http :8080/bank-account
+    - http :8080
+    - http :8080/not-found ololo=trololo
+    - http :8080 hello=world
+    - http :8080/openapi
+    - http :8080/openapi Accept:application/json
+    - http :8080/health
+    - http :8080/metrics
+    - http :8080/metrics Accept:application/json
+    - http :8080/static/microprofile-quickstart-integration-tests.http
+    - stop_any 80 8080
+
+  - stage: test
     name: microprofile-quickstart
     jdk: openjdk8
     script:
@@ -121,6 +141,26 @@ jobs:
     name: mvn
     jdk: openjdk8
     script: cd $TRAVIS_BUILD_DIR && ./mvnw
+
+  - stage: test
+    name: microprofile-jpa jdk11
+    jdk: openjdk11
+    script:
+    - cd $TRAVIS_BUILD_DIR && ./mvnw -f microprofile-jpa/pom.xml
+    - java -jar $TRAVIS_BUILD_DIR/microprofile-jpa/target/*-all.jar  &
+    - wait_for 8080
+    - http :8080/bank-account username=username balance=123.45
+    - http :8080/bank-account
+    - http :8080
+    - http :8080/not-found ololo=trololo
+    - http :8080 hello=world
+    - http :8080/openapi
+    - http :8080/openapi Accept:application/json
+    - http :8080/health
+    - http :8080/metrics
+    - http :8080/metrics Accept:application/json
+    - http :8080/static/microprofile-quickstart-integration-tests.http
+    - stop_any 80 8080
 
   - stage: test
     name: microprofile-quickstart jdk11

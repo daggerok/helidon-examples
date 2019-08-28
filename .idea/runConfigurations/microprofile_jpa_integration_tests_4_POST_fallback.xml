@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="microprofile-jpa-integration-tests#4-POST-fallback" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/microprofile-jpa/microprofile-jpa-integration-tests.http" index="4">
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="microprofile-jpa" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.github.daggerok.Main" />
+    <module name="microprofile-jpa" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.github.daggerok.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
