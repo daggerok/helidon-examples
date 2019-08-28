@@ -13,7 +13,7 @@
     <artifactId>microprofile-jpa</artifactId>
 
     <properties>
-        <weld-jta.version>3.0.3.Final</weld-jta.version>
+        <weld-jta.version>3.1.2.Final</weld-jta.version>
         <microbean-jpa-cdi.version>0.4.1</microbean-jpa-cdi.version>
         <microbean-jpa-weld-se.version>0.4.2</microbean-jpa-weld-se.version>
         <org.eclipse.persistence.jpa.version>2.7.4</org.eclipse.persistence.jpa.version>
