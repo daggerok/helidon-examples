@@ -42,6 +42,16 @@ jobs:
   include:
 
   - stage: test
+    name: grpc-server-quickstart
+    jdk: openjdk8
+    script:
+    - cd $TRAVIS_BUILD_DIR && ./mvnw -f grpc-server-quickstart/pom.xml
+    - java -jar $TRAVIS_BUILD_DIR/grpc-server-quickstart/target/*-all.jar  &
+    - wait_for 8080
+    - http :8080 || echo 'should fail'
+    - stop_any 80 8080
+
+  - stage: test
     name: web-server-jersey-jsonp
     jdk: openjdk8
     script:
@@ -83,6 +93,16 @@ jobs:
     name: mvn
     jdk: openjdk8
     script: cd $TRAVIS_BUILD_DIR && ./mvnw
+
+  - stage: test
+    name: grpc-server-quickstart jdk11
+    jdk: openjdk11
+    script:
+    - cd $TRAVIS_BUILD_DIR && ./mvnw -f grpc-server-quickstart/pom.xml
+    - java -jar $TRAVIS_BUILD_DIR/grpc-server-quickstart/target/*-all.jar  &
+    - wait_for 8080
+    - http :8080 || echo 'should fail'
+    - stop_any 80 8080
 
   - stage: test
     name: web-server-jersey-jsonp jdk11
