@@ -21,3 +21,4 @@ links:
 * [fold the universe](https://dzone.com/articles/folding-the-universe-part-iii-java-8-list-and-stre)
 * [Configs](https://helidon.io/docs/latest/#/webserver/02_configuration)
 * [Advanced Config Sources](https://helidon.io/docs/latest/#/config/06_advanced-configuration)
+* [Useful GitHub helidon-mp-jpa repository](https://github.com/ljnelson/helidon-mp-jpa)

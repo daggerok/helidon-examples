@@ -55,6 +55,6 @@ GET http://127.0.0.1:8080/metrics
 Accept: application/json
 
 ###
-GET http://127.0.0.1:8080/static/microprofile-jpa-integration-tests.http
+GET http://127.0.0.1:8080/static/microprofile-quickstart-integration-tests.http
 
 ###

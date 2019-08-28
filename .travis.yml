@@ -58,7 +58,7 @@ jobs:
     - http :8080/health
     - http :8080/metrics
     - http :8080/metrics Accept:application/json
-    - http :8080/static/microprofile-quickstart-integration-tests.http
+    - http :8080/static/microprofile-jpa-integration-tests.http
     - stop_any 80 8080
 
   - stage: test
@@ -159,7 +159,7 @@ jobs:
     - http :8080/health
     - http :8080/metrics
     - http :8080/metrics Accept:application/json
-    - http :8080/static/microprofile-quickstart-integration-tests.http
+    - http :8080/static/microprofile-jpa-integration-tests.http
     - stop_any 80 8080
 
   - stage: test
